@@ -1,5 +1,5 @@
-from .DashExtraComponents import DashExtraComponents
+from .SuggestionsInput import SuggestionsInput
 
 __all__ = [
-    "DashExtraComponents"
+    "SuggestionsInput"
 ]
