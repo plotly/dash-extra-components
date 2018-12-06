@@ -1,0 +1,5 @@
+include dash_extra_components/dash_extra_components.min.js
+include dash_extra_components/dash_extra_components.dev.js
+include dash_extra_components/metadata.json
+include dash_extra_components/package.json
+include README.md
