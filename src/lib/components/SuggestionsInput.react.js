@@ -248,7 +248,11 @@ export default class SuggestionsInput extends React.Component {
                     }
                     break;
                 case 'Backspace':
-                    if (this.state.captured.length - 1 < 0) {
+                    if (
+                        this.state.captured.length -
+                            (this.props.triggerless ? 2 : 1) <
+                        0
+                    ) {
                         this.resetSuggestions();
                     } else {
                         this.updateSuggestions({
