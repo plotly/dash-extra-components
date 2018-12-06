@@ -30,6 +30,10 @@ def test_suggestions_input(dash_threaded, selenium):
     suggestion_input.send_keys('$Term\t')
     wait_for_text_to_equal(selenium, '#suggestions-output', 'Terminator')
 
+    # Backend/Callback powered suggestions
+    # need a small delay for the suggestions to appear
+    # without losing the focus on the component for the modal to stay up.
+    # test might be flaky...
     clear_input(suggestion_input)
     time.sleep(1)
     suggestion_input.send_keys('@call')
