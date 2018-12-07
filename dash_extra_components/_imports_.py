@@ -1,5 +1,5 @@
-from .DashExtraComponents import DashExtraComponents
+from .TableOfContents import TableOfContents
 
 __all__ = [
-    "DashExtraComponents"
+    "TableOfContents"
 ]
