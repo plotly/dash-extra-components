@@ -5,17 +5,17 @@
   "main": "build/index.js",
   "scripts": {
     "start": "webpack-serve ./webpack.serve.config.js --open",
+    "validate-init": "python _validate_init.py",
+    "prepublish": "npm run validate-init",
     "build:js-dev": "webpack --mode development",
     "build:js": "webpack --mode production",
-    "build:py": "node ./extract-meta src/lib/components > dash_extra_components/metadata.json && copyfiles package.json dash_extra_components && python -c \"import dash; dash.development.component_loader.generate_classes('dash_extra_components', 'dash_extra_components/metadata.json')\"",
-    "build:all": "npm run build:js & npm run build:js-dev & npm run build:py"
+    "build:py": "(. venv/bin/activate || venv\\scripts\\activate && dash-generate-components ./src/lib/components dash_extra_components)",
+    "build:all": "npm run build:js && npm run build:js-dev && npm run build:py"
   },
   "author": "Philippe Duval philippe@plot.ly",
-  "license": "MIT License",
+  "license": "MIT",
   "dependencies": {
-    "ramda": "^0.25.0",
-    "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -34,9 +34,7 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
-    "webpack-serve": "^1.0.2"
-  },
-  "peerDependencies": {
+    "webpack-serve": "^1.0.2",
     "react": ">=0.14",
     "react-dom": ">=0.14"
   },
