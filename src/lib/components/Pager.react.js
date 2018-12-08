@@ -45,7 +45,7 @@ const Page = props => (
 );
 
 /**
- * Pager with callbacks for the current_page,
+ * Paging for dash apps.
  */
 export default class Pager extends React.Component {
     constructor(props) {
@@ -112,7 +112,7 @@ export default class Pager extends React.Component {
 
     render() {
         const {current_page, pages, total_pages} = this.state;
-        const {className, id} = this.props;
+        const {className, id, page_style, page_className} = this.props;
 
         return (
             <div
@@ -123,6 +123,8 @@ export default class Pager extends React.Component {
                     <Page
                         page={1}
                         text={'first'}
+                        style={page_style}
+                        className={page_className}
                         onPageChange={this.onChangePage}
                     />
                 )}
@@ -130,6 +132,8 @@ export default class Pager extends React.Component {
                     <Page
                         page={current_page - 1}
                         text={'previous'}
+                        style={page_style}
+                        className={page_className}
                         onPageChange={this.onChangePage}
                     />
                 )}
@@ -144,6 +148,8 @@ export default class Pager extends React.Component {
                     <Page
                         page={current_page + 1}
                         text={'next'}
+                        style={page_style}
+                        className={page_className}
                         onPageChange={this.onChangePage}
                     />
                 )}
@@ -151,6 +157,8 @@ export default class Pager extends React.Component {
                     <Page
                         page={total_pages}
                         text={'last'}
+                        style={page_style}
+                        className={page_className}
                         onPageChange={this.onChangePage}
                     />
                 )}
@@ -167,7 +175,16 @@ Pager.defaultProps = {
 
 Pager.propTypes = {
     id: PropTypes.string,
+    style: PropTypes.object,
     className: PropTypes.string,
+    /**
+     * Style for the page numbers.
+     */
+    page_style: PropTypes.object,
+    /**
+     * CSS class for the page numbers.
+     */
+    page_className: PropTypes.string,
 
     /**
      * The total items in the set.
