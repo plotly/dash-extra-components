@@ -37,8 +37,7 @@ const Page = props => (
             cursor: 'pointer'
         }, props.style || {})}
         onClick={() => props.onPageChange(props.page)}
-        className={'dash-pager-page'}
-        {...omit(['page', 'text'], props)}
+        {...omit(['page', 'text', 'style'], props)}
     >
         {props.text || props.page}
     </span>
@@ -141,6 +140,8 @@ export default class Pager extends React.Component {
                     <Page
                         page={e}
                         key={`page-${e}`}
+                        style={page_style}
+                        className={page_className}
                         onPageChange={this.onChangePage}
                     />
                 ))}
