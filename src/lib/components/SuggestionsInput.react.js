@@ -405,7 +405,7 @@ export default class SuggestionsInput extends React.Component {
             value: value,
             onChange: this.onChange,
             onKeyUp: this.onKeyUp,
-            tabindex: -1,
+            tabIndex: -1,
             ref: r => (this._input = r),
             onKeyDown: this.preventTabNavigation,
         };
