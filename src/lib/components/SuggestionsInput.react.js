@@ -5,7 +5,7 @@ import {
     merge,
     omit,
     mergeAll,
-    memoizeWith,
+    memoize,
     any,
     identity,
 } from 'ramda';
@@ -40,9 +40,9 @@ const mapSuggestions = suggestions =>
         return a;
     }, {});
 
-const filterSuggestions = memoizeWith(identity, (captured, options, fuzzy) => {
+const filterSuggestions = memoize((captured, options, fuzzy) => {
     const r = fuzzy ? new RegExp(captured) : new RegExp(`^${captured}`);
-    return options.filter(e => r.test(e));
+    return options.filter(e => r.test(e.value));
 });
 
 const getComputedNumStyleAttr = (elem, propName) =>
