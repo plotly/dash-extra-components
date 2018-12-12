@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {contains, merge, omit, mergeAll, memoize, any} from 'ramda';
+import {
+    contains,
+    merge,
+    omit,
+    mergeAll,
+    memoizeWith,
+    any,
+    identity,
+} from 'ramda';
 
 // Style for single suggestion
 const defaultSuggestionStyle = {
@@ -32,9 +40,10 @@ const mapSuggestions = suggestions =>
         return a;
     }, {});
 
-const filterSuggestions = memoize((captured, options) =>
-    options.filter(e => e.value.match(captured))
-);
+const filterSuggestions = memoizeWith(identity, (captured, options, fuzzy) => {
+    const r = fuzzy ? new RegExp(captured) : new RegExp(`^${captured}`);
+    return options.filter(e => r.test(e));
+});
 
 const getComputedNumStyleAttr = (elem, propName) =>
     parseFloat(window.getComputedStyle(elem, null).getPropertyValue(propName));
@@ -290,7 +299,8 @@ export default class SuggestionsInput extends React.Component {
     }
 
     filterSuggestions(captured, options) {
-        const filteredOptions = filterSuggestions(captured, options);
+        const filteredOptions = filterSuggestions(
+            captured, options, this.props.fuzzy);
         this.setFilteredOptions(filteredOptions);
     }
 
@@ -592,6 +602,12 @@ SuggestionsInput.propTypes = {
      * The current trigger. (READONLY)
      */
     current_trigger: PropTypes.string,
+
+    /**
+     * If true match all options containing the captured input
+     * else match suggestions from the start of the line.
+     */
+    fuzzy: PropTypes.string,
 
     /**
      * Send suggestions for every keystroke.
