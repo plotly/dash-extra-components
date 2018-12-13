@@ -1,5 +1,4 @@
 import dash
-import flask
 
 import dash_html_components as html
 import dash_extra_components as extra
@@ -59,24 +58,8 @@ app.layout = html.Div([
         include_trigger=False
     ),
     html.Br(),
-    extra.SuggestionsInput(
-        id='triggerless',
-        suggestions=[
-            {
-                'trigger': '',
-                'options': [
-                    {'value': 'Rambo'},
-                    {'value': 'Alien'},
-                    {'value': 'Terminator'},
-                    {'value': 'Predator'}
-                ]
-            }
-        ],
-        triggerless=True,
-    ),
     html.Div(id='capture-output'),
     html.Div(id='suggestions-output'),
-    html.Div(id='triggerless-output')
 ])
 
 
@@ -101,7 +84,6 @@ def on_capture(captured):
 
 for output in (
         'suggestions-output',
-        'triggerless-output'
 ):
     @app.callback(Output(output, 'children'),
                   [Input(output.replace('-output', ''), 'value')])

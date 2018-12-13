@@ -7,7 +7,6 @@ import {
     mergeAll,
     memoize,
     any,
-    identity,
 } from 'ramda';
 
 // Style for single suggestion
@@ -224,10 +223,8 @@ export default class SuggestionsInput extends React.Component {
                 });
             }
             this.setFilteredOptions(trigger.options);
-        } else if (currentTrigger || this.props.triggerless) {
-            const trigger = this.props.triggerless
-                ? this.props.suggestions[0]
-                : triggers[currentTrigger];
+        } else if (currentTrigger) {
+            const trigger = triggers[currentTrigger];
             const options = trigger.options;
             switch (e.key) {
                 case 'Enter':
@@ -250,9 +247,7 @@ export default class SuggestionsInput extends React.Component {
                     break;
                 case 'Backspace':
                     if (
-                        this.state.captured.length -
-                            (this.props.triggerless ? 2 : 1) <
-                        0
+                        this.state.captured.length - 1 < 0
                     ) {
                         this.resetSuggestions();
                     } else {
@@ -384,7 +379,6 @@ export default class SuggestionsInput extends React.Component {
             suggestion_className,
             suggestion_selected_className,
             suggestion_selected_style,
-            triggerless,
         } = this.props;
 
         const {value, currentTrigger, index, filteredOptions} = this.state;
@@ -411,7 +405,7 @@ export default class SuggestionsInput extends React.Component {
                 className={className}
             >
                 {input}
-                {(currentTrigger || triggerless) && (
+                {(currentTrigger) && (
                     <Suggestions
                         {...omit(
                             ['options'],
@@ -481,7 +475,6 @@ SuggestionsInput.defaultProps = {
     multi_line: false,
     value: '',
     allow_space_in_suggestions: false,
-    triggerless: false,
 };
 
 const OptionsShape = PropTypes.shape({
@@ -592,11 +585,6 @@ SuggestionsInput.propTypes = {
      * else match suggestions from the start of the line.
      */
     fuzzy: PropTypes.string,
-
-    /**
-     * Send suggestions for every keystroke.
-     */
-    triggerless: PropTypes.bool,
 
     setProps: PropTypes.any,
 };
