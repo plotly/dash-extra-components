@@ -9,21 +9,24 @@ An `<input>`/<textarea> with associated triggers that will display a menu
 with suggestions.
 
 Keyword arguments:
-- suggestions_style (dict; optional): Given and merged with the default style to the suggestions modal.
+- id (string; optional)
+- className (string; optional): CSS class for the container of the input and suggestions modal.
 - style (dict; optional): Style object given to the container of the input and suggestions modal.
-- suggestion_selected_style (dict; optional): Style of a suggestion while it is selected.
-- suggestion_className (string; optional): CSS class for a single suggestion element.
-- suggestion_style (dict; optional): Style of the suggestion elements (single suggestion).
-- allow_space_in_suggestions (boolean; optional): Continue capturing the input when a space is entered while
-the suggestion menu is open.
-- setProps (boolean | number | string | dict | list; optional)
+- multi_line (boolean; optional): true -> <textarea>
+false -> <input>
+- value (string; optional): Current value of the input/textarea
 - suggestions (list; required): Suggestions array containing the options to show
 when a trigger is activated.
-- value (string; optional): Current value of the input/textarea
-- current_trigger (string; optional): The current trigger. (READONLY)
-- className (string; optional): CSS class for the container of the input and suggestions modal.
-- suggestion_selected_className (string; optional): CSS class for a suggestion while it is selected.
+- allow_space_in_suggestions (boolean; optional): Continue capturing the input when a space is entered while
+the suggestion menu is open.
 - include_trigger (boolean; optional): Include the trigger in the rendered value.
+- suggestions_className (string; optional): Given to the suggestions modal.
+- suggestions_style (dict; optional): Given and merged with the default style to the suggestions modal.
+- suggestion_style (dict; optional): Style of the suggestion elements (single suggestion).
+- suggestion_className (string; optional): CSS class for a single suggestion element.
+- suggestion_selected_style (dict; optional): Style of a suggestion while it is selected.
+- suggestion_selected_className (string; optional): CSS class for a suggestion while it is selected.
+- captured (string; optional): Readonly prop containing the typed string since the last trigger. (READONLY)
 - filtered_options (list; optional): Currently displayed suggestions. Update in a callback to set the currently displayed suggestions.
 
 @example
@@ -32,22 +35,21 @@ app.callback(Output('suggestions', 'filtered_options'),
              [Input('suggestions', 'captured')],
              [State('suggestions', 'current_trigger')]
 ```
-- multi_line (boolean; optional): true -> <textarea>
-false -> <input>
-- suggestions_className (string; optional): Given to the suggestions modal.
+- current_trigger (string; optional): The current trigger. (READONLY)
+- fuzzy (string; optional): If true match all options containing the captured input
+else match suggestions from the start of the line.
 - triggerless (boolean; optional): Send suggestions for every keystroke.
-- id (string; optional)
-- captured (string; optional): Readonly prop containing the typed string since the last trigger. (READONLY)
+- setProps (boolean | number | string | dict | list; optional)
 
 Available events: """
     @_explicitize_args
-    def __init__(self, suggestions_style=Component.UNDEFINED, style=Component.UNDEFINED, suggestion_selected_style=Component.UNDEFINED, suggestion_className=Component.UNDEFINED, suggestion_style=Component.UNDEFINED, allow_space_in_suggestions=Component.UNDEFINED, suggestions=Component.REQUIRED, value=Component.UNDEFINED, current_trigger=Component.UNDEFINED, className=Component.UNDEFINED, suggestion_selected_className=Component.UNDEFINED, include_trigger=Component.UNDEFINED, filtered_options=Component.UNDEFINED, multi_line=Component.UNDEFINED, suggestions_className=Component.UNDEFINED, triggerless=Component.UNDEFINED, id=Component.UNDEFINED, captured=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['className', 'style', 'suggestion_selected_style', 'suggestion_className', 'suggestion_style', 'allow_space_in_suggestions', 'suggestions', 'value', 'id', 'suggestions_style', 'suggestion_selected_className', 'include_trigger', 'captured', 'multi_line', 'suggestions_className', 'setProps', 'triggerless', 'current_trigger', 'filtered_options']
+    def __init__(self, id=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, multi_line=Component.UNDEFINED, value=Component.UNDEFINED, suggestions=Component.REQUIRED, allow_space_in_suggestions=Component.UNDEFINED, include_trigger=Component.UNDEFINED, suggestions_className=Component.UNDEFINED, suggestions_style=Component.UNDEFINED, suggestion_style=Component.UNDEFINED, suggestion_className=Component.UNDEFINED, suggestion_selected_style=Component.UNDEFINED, suggestion_selected_className=Component.UNDEFINED, captured=Component.UNDEFINED, filtered_options=Component.UNDEFINED, current_trigger=Component.UNDEFINED, fuzzy=Component.UNDEFINED, triggerless=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'className', 'style', 'multi_line', 'value', 'suggestions', 'allow_space_in_suggestions', 'include_trigger', 'suggestions_className', 'suggestions_style', 'suggestion_style', 'suggestion_className', 'suggestion_selected_style', 'suggestion_selected_className', 'captured', 'filtered_options', 'current_trigger', 'fuzzy', 'triggerless', 'setProps']
         self._type = 'SuggestionsInput'
         self._namespace = 'dash_extra_components'
         self._valid_wildcard_attributes =            []
         self.available_events = []
-        self.available_properties = ['className', 'style', 'suggestion_selected_style', 'suggestion_className', 'suggestion_style', 'allow_space_in_suggestions', 'suggestions', 'value', 'id', 'suggestions_style', 'suggestion_selected_className', 'include_trigger', 'captured', 'multi_line', 'suggestions_className', 'setProps', 'triggerless', 'current_trigger', 'filtered_options']
+        self.available_properties = ['id', 'className', 'style', 'multi_line', 'value', 'suggestions', 'allow_space_in_suggestions', 'include_trigger', 'suggestions_className', 'suggestions_style', 'suggestion_style', 'suggestion_className', 'suggestion_selected_style', 'suggestion_selected_className', 'captured', 'filtered_options', 'current_trigger', 'fuzzy', 'triggerless', 'setProps']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')
@@ -55,7 +57,7 @@ Available events: """
         _locals.update(kwargs)  # For wildcard attrs
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
 
-        for k in [u'suggestions']:
+        for k in ['suggestions']:
             if k not in args:
                 raise TypeError(
                     'Required argument `' + k + '` was not specified.')
