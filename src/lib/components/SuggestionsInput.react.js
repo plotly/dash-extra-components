@@ -187,18 +187,14 @@ export default class SuggestionsInput extends React.Component {
         }
     }
 
-    updateSuggestions({captured, options, suggestion_route}) {
+    updateSuggestions({captured, options}) {
         this.setState({captured});
         if (this.props.setProps) {
             this.props.setProps({
                 captured: captured,
             });
         }
-        if (suggestion_route) {
-            this.requestSuggestions(suggestion_route, captured);
-        } else {
-            this.filterSuggestions(captured, options);
-        }
+        this.filterSuggestions(captured, options);
     }
 
     onKeyUp(e) {
@@ -227,11 +223,7 @@ export default class SuggestionsInput extends React.Component {
                     captured: '',
                 });
             }
-            if (trigger.suggestion_route) {
-                this.requestSuggestions(trigger.suggestion_route, '');
-            } else {
-                this.setFilteredOptions(trigger.options);
-            }
+            this.setFilteredOptions(trigger.options);
         } else if (currentTrigger || this.props.triggerless) {
             const trigger = this.props.triggerless
                 ? this.props.suggestions[0]
@@ -266,7 +258,6 @@ export default class SuggestionsInput extends React.Component {
                     } else {
                         this.updateSuggestions({
                             captured: captured.slice(0, captured.length - 1),
-                            suggestion_route: trigger.suggestion_route,
                             options,
                         });
                     }
@@ -278,7 +269,6 @@ export default class SuggestionsInput extends React.Component {
                         this.updateSuggestions({
                             captured: captured + e.key,
                             options,
-                            suggestion_route: trigger.suggestion_route,
                         });
                     }
                     break;
@@ -290,7 +280,6 @@ export default class SuggestionsInput extends React.Component {
                     if (e.key.length === 1) {
                         this.updateSuggestions({
                             captured: captured + e.key,
-                            suggestion_route: trigger.suggestion_route,
                             options,
                         });
                     }
@@ -533,11 +522,6 @@ SuggestionsInput.propTypes = {
              * input value.
              */
             trigger: PropTypes.string,
-            /**
-             * Call this route to retrieve the options
-             * It needs to return a json array of options shape.
-             */
-            suggestion_route: PropTypes.string,
             /**
              * The options this suggestion trigger will display.
              */

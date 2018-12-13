@@ -42,11 +42,6 @@ app.layout = html.Div([
                 ],
             },
             {
-                'trigger': '#',
-                # This route will be used to retrieve the options.
-                'suggestion_route': '/suggestions'
-            },
-            {
                 'trigger': '@',
                 'options': []
             }
@@ -83,21 +78,6 @@ app.layout = html.Div([
     html.Div(id='suggestions-output'),
     html.Div(id='triggerless-output')
 ])
-
-
-# Backend powered suggestions
-@app.server.route('/suggestions')
-def route_suggestions():
-    payload = flask.request.args
-
-    captured = payload.get('captured')
-    if not captured:
-        # Return the whole list since it's the first capture.
-        return flask.jsonify([{'value': x} for x in suggestion_list])
-
-    return flask.jsonify([
-        {'value': x} for x in suggestion_list if captured in x
-    ])
 
 
 # Callback powered suggestions
