@@ -31,10 +31,11 @@ const Page = props => (
         style={merge({
             padding: '5px',
             backgroundColor: '#428eff',
-            margin: '5px',
+            margin: '3px',
             boxSizing: 'border-box',
             display: 'inline-block',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            userSelect: 'none',
         }, props.style || {})}
         onClick={() => props.onPageChange(props.page)}
         {...omit(['page', 'text', 'style'], props)}
