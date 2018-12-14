@@ -4,6 +4,7 @@ import {range, omit, merge} from 'ramda';
 
 const startOffset = (page, itemPerPage) =>
     (page - 1) * (page > 1 ? itemPerPage : 0);
+
 const endOffset = (start, itemPerPage, page, total, leftOver) =>
     page !== total
         ? start + itemPerPage
@@ -51,7 +52,7 @@ export default class Pager extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            current_page: props.current_page,
+            current_page: null,
             start_offset: null,
             end_offset: null,
             pages: [],
@@ -93,14 +94,10 @@ export default class Pager extends React.Component {
         this.setState(payload);
 
         if (setProps) {
-            if (page !== this.props.current_page) {
-                setProps(payload);
-            } else {
-                setProps(omit(['current_page'], payload));
-            }
             if (this.state.total_pages !== this.props.total_pages) {
-                setProps({total_pages: this.state.total_pages});
+                payload.total_pages = this.state.total_pages;
             }
+            setProps(payload);
         }
     }
 
