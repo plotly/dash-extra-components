@@ -37,19 +37,18 @@ false -> <input>
 - fuzzy (string; optional): If true match all options containing the captured input
 else match suggestions from the start of the line.
 - suggestions_className (string; optional): Given to the suggestions modal.
-- triggerless (boolean; optional): Send suggestions for every keystroke.
 - id (string; optional)
 - captured (string; optional): Readonly prop containing the typed string since the last trigger. (READONLY)
 
 Available events: """
     @_explicitize_args
-    def __init__(self, suggestions_style=Component.UNDEFINED, style=Component.UNDEFINED, suggestion_selected_style=Component.UNDEFINED, suggestion_className=Component.UNDEFINED, suggestion_style=Component.UNDEFINED, allow_space_in_suggestions=Component.UNDEFINED, suggestions=Component.REQUIRED, value=Component.UNDEFINED, current_trigger=Component.UNDEFINED, className=Component.UNDEFINED, suggestion_selected_className=Component.UNDEFINED, include_trigger=Component.UNDEFINED, filtered_options=Component.UNDEFINED, multi_line=Component.UNDEFINED, fuzzy=Component.UNDEFINED, suggestions_className=Component.UNDEFINED, triggerless=Component.UNDEFINED, id=Component.UNDEFINED, captured=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['className', 'style', 'suggestion_selected_style', 'suggestion_className', 'suggestion_style', 'allow_space_in_suggestions', 'suggestions', 'value', 'id', 'suggestions_style', 'suggestion_selected_className', 'include_trigger', 'captured', 'multi_line', 'suggestions_className', 'fuzzy', 'setProps', 'triggerless', 'current_trigger', 'filtered_options']
+    def __init__(self, suggestions_style=Component.UNDEFINED, style=Component.UNDEFINED, suggestion_selected_style=Component.UNDEFINED, suggestion_className=Component.UNDEFINED, suggestion_style=Component.UNDEFINED, allow_space_in_suggestions=Component.UNDEFINED, suggestions=Component.REQUIRED, value=Component.UNDEFINED, current_trigger=Component.UNDEFINED, className=Component.UNDEFINED, suggestion_selected_className=Component.UNDEFINED, include_trigger=Component.UNDEFINED, filtered_options=Component.UNDEFINED, multi_line=Component.UNDEFINED, fuzzy=Component.UNDEFINED, suggestions_className=Component.UNDEFINED, id=Component.UNDEFINED, captured=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['className', 'style', 'suggestion_selected_style', 'suggestion_className', 'suggestion_style', 'allow_space_in_suggestions', 'suggestions', 'value', 'id', 'suggestions_style', 'suggestion_selected_className', 'include_trigger', 'captured', 'multi_line', 'suggestions_className', 'fuzzy', 'setProps', 'current_trigger', 'filtered_options']
         self._type = 'SuggestionsInput'
         self._namespace = 'dash_extra_components'
         self._valid_wildcard_attributes =            []
         self.available_events = []
-        self.available_properties = ['className', 'style', 'suggestion_selected_style', 'suggestion_className', 'suggestion_style', 'allow_space_in_suggestions', 'suggestions', 'value', 'id', 'suggestions_style', 'suggestion_selected_className', 'include_trigger', 'captured', 'multi_line', 'suggestions_className', 'fuzzy', 'setProps', 'triggerless', 'current_trigger', 'filtered_options']
+        self.available_properties = ['className', 'style', 'suggestion_selected_style', 'suggestion_className', 'suggestion_style', 'allow_space_in_suggestions', 'suggestions', 'value', 'id', 'suggestions_style', 'suggestion_selected_className', 'include_trigger', 'captured', 'multi_line', 'suggestions_className', 'fuzzy', 'setProps', 'current_trigger', 'filtered_options']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')
