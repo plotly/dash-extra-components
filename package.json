@@ -3,14 +3,20 @@
   "version": "0.0.1",
   "description": "Extra components for dash",
   "main": "build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plotly/dash-extra-components"
+  },
   "scripts": {
     "start": "webpack-serve ./webpack.serve.config.js --open",
     "validate-init": "python _validate_init.py",
     "prepublish": "npm run validate-init",
     "build:js-dev": "webpack --mode development",
     "build:js": "webpack --mode production",
-    "build:py": "(. venv/bin/activate || venv\\scripts\\activate && dash-generate-components ./src/lib/components dash_extra_components)",
-    "build:all": "npm run build:js && npm run build:js-dev && npm run build:py"
+    "build:py": "dash-generate-components ./src/lib/components dash_extra_components",
+    "build:py-activated": "(. venv/bin/activate || venv\\scripts\\activate && npm run build:py)",
+    "build:all": "npm run build:js && npm run build:js-dev && npm run build:py",
+    "build:all-activated": "(. venv/bin/activate || venv\\scripts\\activate && npm run build:all)"
   },
   "author": "Philippe Duval philippe@plot.ly",
   "license": "MIT",
@@ -30,6 +36,7 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-react": "^7.9.1",
     "npm": "^6.1.0",
+    "prettier": "^1.15.3",
     "react-docgen": "^2.20.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.20.2",

@@ -1,7 +1,7 @@
 /* eslint no-magic-numbers: 0 */
 import React, {Component} from 'react';
 
-import { DashExtraComponents } from '../lib';
+import { SuggestionsInput } from '../lib';
 
 class App extends Component {
 
@@ -20,6 +20,25 @@ class App extends Component {
     render() {
         return (
             <div>
+                <SuggestionsInput
+                    suggestions={
+                        [
+                            {
+                                'trigger': '$',
+                                'options': [
+                                    {
+                                        'value': 'Rambo',
+                                        'description': 'Bob description'
+                                    },
+                                    {
+                                        'value': 'Terminator',
+                                        'description': 'Arnold description'
+                                    }
+                                ],
+                            },
+                        ]
+                    }
+                    />
             </div>
         )
     }
