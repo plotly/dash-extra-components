@@ -22,9 +22,6 @@ def test_suggestions_input(dash_threaded, selenium):
 
     suggestion_input = wait_for_element_by_css_selector(
         selenium, '#suggestions')
-    triggerless_input = wait_for_element_by_css_selector(
-        selenium, '#triggerless'
-    )
 
     # Tests all suggestion types.
     suggestion_input.send_keys('$Term\t')
@@ -40,13 +37,3 @@ def test_suggestions_input(dash_threaded, selenium):
     time.sleep(1)
     suggestion_input.send_keys('\t')
     wait_for_text_to_equal(selenium, '#suggestions-output', 'callback')
-
-    clear_input(suggestion_input)
-    time.sleep(1)
-    suggestion_input.send_keys('#fi')
-    time.sleep(1)
-    suggestion_input.send_keys('\t')
-    wait_for_text_to_equal(selenium, '#suggestions-output', 'five')
-
-    triggerless_input.send_keys('Preda\t')
-    wait_for_text_to_equal(selenium, '#triggerless-output', 'Predator')
