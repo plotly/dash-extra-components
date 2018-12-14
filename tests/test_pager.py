@@ -1,14 +1,14 @@
 from pytest_dash.utils import (
+    import_app,
     wait_for_element_by_css_selector,
     wait_for_text_to_equal
 )
 
 
-def test_pager(dash_subprocess, selenium):
-    dash_subprocess('test_apps.pager')
+def test_pager(dash_threaded, selenium):
+    dash_threaded(import_app('test_apps.pager'))
 
     pager_elem = wait_for_element_by_css_selector(selenium, '#pager')
-    # content = wait_for_element_by_css_selector(selenium, '#page-content')
 
     wait_for_text_to_equal(selenium, '#page-content', 'You are on page 1')
 
