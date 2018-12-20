@@ -23,3 +23,9 @@ config
 .travis.yml
 CHANGELOG.md
 README.md
+venv
+dist
+*.egg
+.pytest_cache
+test*
+
