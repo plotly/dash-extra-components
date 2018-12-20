@@ -16,5 +16,6 @@ setup(
     include_package_data=True,
     license=package['license'],
     description=package['description'] if 'description' in package else package_name,
+    url='https://github.com/plotly/dash-extra-components',
     install_requires=[]
 )
