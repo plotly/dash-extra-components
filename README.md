@@ -1,7 +1,14 @@
 # dash-extra-components
 
-This package provides extra React components for [Dash][1]. Extra components are
-less generic and more experimental than core components.
+This package provides extra React components for [Dash][1].
+
+**Why Dash Extra Components?**
+
+[Dash Core Components][3] is our "essential" component suite for Dash. Not all components make the cut!
+Dash Extra Components is a more specialized collection of components written by Plotly. Some components were created for our own projects (`dec.TableOfContents` was written for the [Dash User Guide][2]) while others were made for our [Dash Deployment Server](http://plot.ly/dash/pricing/) customers (e.g. `dec.SuggestionsInput`).
+Instead of creating a separate repository for each component, we decided to bundle them as a new package to ease discoverability and maintenance.
+
+Dash Extra Components are maintained by Plotly. However, we don't view them quite as essential as our other Dash components and, as such, won't be giving them as much attention with respect to upkeep and documentation. What you see is what you get!
 
 ## Installation
 
@@ -12,7 +19,7 @@ less generic and more experimental than core components.
 Importing dash-extra-components:
 
 ```python
-import dash_extra_components as extra
+import dash_extra_components as dec
 ```
 
 ## Development
