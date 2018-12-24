@@ -1,14 +1,13 @@
 /* eslint no-magic-numbers: 0 */
 import React, {Component} from 'react';
 
-import { SuggestionsInput } from '../lib';
+import {SuggestionsInput} from '../lib';
 
 class App extends Component {
-
     constructor() {
         super();
         this.state = {
-            value: ''
+            value: '',
         };
         this.setProps = this.setProps.bind(this);
     }
@@ -21,26 +20,24 @@ class App extends Component {
         return (
             <div>
                 <SuggestionsInput
-                    suggestions={
-                        [
-                            {
-                                'trigger': '$',
-                                'options': [
-                                    {
-                                        'value': 'Rambo',
-                                        'description': 'Bob description'
-                                    },
-                                    {
-                                        'value': 'Terminator',
-                                        'description': 'Arnold description'
-                                    }
-                                ],
-                            },
-                        ]
-                    }
-                    />
+                    suggestions={[
+                        {
+                            trigger: '$',
+                            options: [
+                                {
+                                    value: 'Rambo',
+                                    description: 'Bob description',
+                                },
+                                {
+                                    value: 'Terminator',
+                                    description: 'Arnold description',
+                                },
+                            ],
+                        },
+                    ]}
+                />
             </div>
-        )
+        );
     }
 }
 
