@@ -1,11 +1,11 @@
-from pytest_dash.utils import (
-    import_app,
+from pytest_dash.wait_for import (
     wait_for_element_by_css_selector
 )
 
 
-def test_table_of_contents(dash_threaded, selenium):
-    app = import_app('test_apps.table_of_contents')
+def test_table_of_contents(dash_threaded):
+    from test_apps.table_of_contents import app
+    selenium = dash_threaded.driver
     dash_threaded(app)
 
     toc_elem = wait_for_element_by_css_selector(selenium, '#toc')

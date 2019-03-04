@@ -1,8 +1,7 @@
 import time
 
 
-from pytest_dash.utils import (
-    import_app,
+from pytest_dash.wait_for import (
     wait_for_text_to_equal,
     wait_for_element_by_css_selector
 )
@@ -16,8 +15,9 @@ def clear_input(input_element):
     )
 
 
-def test_suggestions_input(dash_threaded, selenium):
-    app = import_app('test_apps.suggestions_input')
+def test_suggestions_input(dash_threaded):
+    from test_apps.suggestions_input import app
+    selenium = dash_threaded.driver
     dash_threaded(app)
 
     suggestion_input = wait_for_element_by_css_selector(
