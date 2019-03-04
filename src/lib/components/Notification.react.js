@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import {timestampProp} from '../utils';
 import {merge} from 'ramda';
 
@@ -15,10 +15,9 @@ export default class DashNotification extends React.Component {
 
     componentDidMount() {
         const {setProps} = this.props;
-        if (!("Notification" in window) && setProps) {
-            setProps({permission: 'unsupported'})
-        }
-        else if (Notification.permission === 'default') {
+        if (!('Notification' in window) && setProps) {
+            setProps({permission: 'unsupported'});
+        } else if (Notification.permission === 'default') {
             Notification.requestPermission().then(this.onPermission);
         } else {
             this.onPermission(window.Notification.permission);
@@ -33,8 +32,16 @@ export default class DashNotification extends React.Component {
 
     sendNotification(permission) {
         const {
-            setProps, body, title, icon, require_interaction,
-            lang, badge, tag, image, vibrate
+            setProps,
+            body,
+            title,
+            icon,
+            require_interaction,
+            lang,
+            badge,
+            tag,
+            image,
+            vibrate,
         } = this.props;
         if (permission === 'granted') {
             const options = {
@@ -53,24 +60,18 @@ export default class DashNotification extends React.Component {
                     setProps(
                         merge(
                             {displayed: false},
-                            timestampProp(
-                                'n_clicks',
-                                this.props.n_clicks + 1
-                            )
+                            timestampProp('n_clicks', this.props.n_clicks + 1)
                         )
-                    )
+                    );
                 }
             };
             notification.onclose = () => {
                 setProps(
                     merge(
                         {displayed: false},
-                        timestampProp(
-                            'n_closes',
-                            this.props.n_closes + 1
-                        )
-                    ),
-                )
+                        timestampProp('n_closes', this.props.n_closes + 1)
+                    )
+                );
             };
         }
     }
@@ -78,7 +79,7 @@ export default class DashNotification extends React.Component {
     onPermission(permission) {
         const {displayed, setProps} = this.props;
         if (setProps) {
-            setProps({permission})
+            setProps({permission});
         }
         if (displayed) {
             this.sendNotification(permission);
@@ -106,7 +107,10 @@ DashNotification.propTypes = {
      * Permission granted by the user (READONLY)
      */
     permission: PropTypes.oneOf([
-        'denied', 'granted', 'default', 'unsupported'
+        'denied',
+        'granted',
+        'default',
+        'unsupported',
     ]),
 
     title: PropTypes.string.isRequired,
@@ -141,7 +145,7 @@ DashNotification.propTypes = {
      */
     vibrate: PropTypes.oneOfType([
         PropTypes.number,
-        PropTypes.arrayOf(PropTypes.number)
+        PropTypes.arrayOf(PropTypes.number),
     ]),
     /**
      * Indicates that a notification should remain active until the user clicks or dismisses it, rather than closing automatically. The default value is false.
@@ -151,7 +155,7 @@ DashNotification.propTypes = {
     /**
      *
      */
-    displayed:  PropTypes.bool,
+    displayed: PropTypes.bool,
 
     n_clicks: PropTypes.number,
     n_clicks_timestamp: PropTypes.number,
