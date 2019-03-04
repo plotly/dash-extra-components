@@ -66,12 +66,14 @@ export default class DashNotification extends React.Component {
                 }
             };
             notification.onclose = () => {
-                setProps(
-                    merge(
-                        {displayed: false},
-                        timestampProp('n_closes', this.props.n_closes + 1)
-                    )
-                );
+                if (setProps) {
+                    setProps(
+                        merge(
+                            {displayed: false},
+                            timestampProp('n_closes', this.props.n_closes + 1)
+                        )
+                    );
+                }
             };
         }
     }
