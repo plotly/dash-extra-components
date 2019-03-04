@@ -79,6 +79,9 @@ DashNotification.defaultProps = {
 DashNotification.propTypes = {
     id: PropTypes.string,
 
+    /**
+     * Permission granted by the user (READONLY)
+     */
     permission: PropTypes.oneOf([
         'denied', 'granted', 'default', 'unsupported'
     ]),
