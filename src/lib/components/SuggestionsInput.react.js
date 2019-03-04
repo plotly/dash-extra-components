@@ -1,13 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    contains,
-    merge,
-    omit,
-    mergeAll,
-    memoize,
-    any,
-} from 'ramda';
+import {contains, merge, omit, mergeAll, memoize, any} from 'ramda';
 
 // Style for single suggestion
 const defaultSuggestionStyle = {
@@ -246,9 +239,7 @@ export default class SuggestionsInput extends React.Component {
                     }
                     break;
                 case 'Backspace':
-                    if (
-                        this.state.captured.length - 1 < 0
-                    ) {
+                    if (this.state.captured.length - 1 < 0) {
                         this.resetSuggestions();
                     } else {
                         this.updateSuggestions({
@@ -284,7 +275,10 @@ export default class SuggestionsInput extends React.Component {
 
     filterSuggestions(captured, options) {
         const filteredOptions = filterSuggestions(
-            captured, options, this.props.fuzzy);
+            captured,
+            options,
+            this.props.fuzzy
+        );
         this.setFilteredOptions(filteredOptions);
     }
 
@@ -405,7 +399,7 @@ export default class SuggestionsInput extends React.Component {
                 className={className}
             >
                 {input}
-                {(currentTrigger) && (
+                {currentTrigger && (
                     <Suggestions
                         {...omit(
                             ['options'],
