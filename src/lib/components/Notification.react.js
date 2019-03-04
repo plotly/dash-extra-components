@@ -129,4 +129,5 @@ DashNotification.propTypes = {
     n_closes_timestamp: PropTypes.number,
 
     setProps: PropTypes.func,
+    key: PropTypes.string,
 };
