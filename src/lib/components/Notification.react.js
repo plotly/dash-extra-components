@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {timestampProp} from "../utils";
+import {timestampProp} from '../utils';
+import {merge} from 'ramda';
 
 export default class DashNotification extends React.Component {
     constructor(props) {
@@ -24,11 +25,17 @@ export default class DashNotification extends React.Component {
         }
     }
 
-    onPermission(permission) {
-        const {setProps, body, title, icon, require_interaction, lang, badge, tag, image, vibrate} = this.props;
-        if (setProps) {
-            setProps({permission})
+    componentDidUpdate(prevProps) {
+        if (!prevProps.displayed && this.props.displayed) {
+            this.sendNotification(this.props.permission);
         }
+    }
+
+    sendNotification(permission) {
+        const {
+            setProps, body, title, icon, require_interaction,
+            lang, badge, tag, image, vibrate
+        } = this.props;
         if (permission === 'granted') {
             const options = {
                 requireInteraction: require_interaction,
@@ -44,21 +51,37 @@ export default class DashNotification extends React.Component {
             notification.onclick = () => {
                 if (setProps) {
                     setProps(
-                        timestampProp(
-                            'n_clicks',
-                            this.props.n_clicks + 1
+                        merge(
+                            {displayed: false},
+                            timestampProp(
+                                'n_clicks',
+                                this.props.n_clicks + 1
+                            )
                         )
                     )
                 }
             };
             notification.onclose = () => {
                 setProps(
-                    timestampProp(
-                        'n_closes',
-                        this.props.n_closes + 1
-                    )
+                    merge(
+                        {displayed: false},
+                        timestampProp(
+                            'n_closes',
+                            this.props.n_closes + 1
+                        )
+                    ),
                 )
             };
+        }
+    }
+
+    onPermission(permission) {
+        const {displayed, setProps} = this.props;
+        if (setProps) {
+            setProps({permission})
+        }
+        if (displayed) {
+            this.sendNotification(permission);
         }
     }
 
@@ -124,6 +147,11 @@ DashNotification.propTypes = {
      * Indicates that a notification should remain active until the user clicks or dismisses it, rather than closing automatically. The default value is false.
      */
     require_interaction: PropTypes.bool,
+
+    /**
+     *
+     */
+    displayed:  PropTypes.bool,
 
     n_clicks: PropTypes.number,
     n_clicks_timestamp: PropTypes.number,

@@ -32,6 +32,7 @@ def on_click(n_clicks, text):
     return dec.Notification(
         id='notification',
         title='Notification',
+        displayed=True,
         body=text,
         key=str(time.time())
     )

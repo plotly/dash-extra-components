@@ -4,6 +4,18 @@
     "displayName": "DashNotification",
     "methods": [
       {
+        "name": "sendNotification",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "permission",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
         "name": "onPermission",
         "docblock": null,
         "modifiers": [],
@@ -126,6 +138,13 @@
           "value": "false",
           "computed": false
         }
+      },
+      "displayed": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": ""
       },
       "n_clicks": {
         "type": {
