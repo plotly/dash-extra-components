@@ -392,7 +392,7 @@ export default class SuggestionsInput extends React.Component {
             ref: r => (this._input = r),
             onKeyDown: this.preventTabNavigation,
             className,
-            style,
+            style: merge(defaultSuggestionInputStyle, style)
         };
 
         const input = multi_line ? (
