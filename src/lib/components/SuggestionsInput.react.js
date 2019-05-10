@@ -391,6 +391,8 @@ export default class SuggestionsInput extends React.Component {
             tabIndex: -1,
             ref: r => (this._input = r),
             onKeyDown: this.preventTabNavigation,
+            className,
+            style: merge(defaultSuggestionInputStyle, style)
         };
 
         const input = multi_line ? (
@@ -400,10 +402,7 @@ export default class SuggestionsInput extends React.Component {
         );
 
         return (
-            <div
-                style={merge(defaultSuggestionInputStyle, style)}
-                className={className}
-            >
+            <div>
                 {input}
                 {(currentTrigger) && (
                     <Suggestions
